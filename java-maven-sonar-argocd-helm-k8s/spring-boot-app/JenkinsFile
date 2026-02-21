@@ -45,11 +45,6 @@ pipeline {
         }
       }
     }
-stage('Fix Workspace Permissions') {
-    steps {
-        sh 'sudo chown -R jenkins:jenkins ${WORKSPACE}'
-    }
-}
     stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
