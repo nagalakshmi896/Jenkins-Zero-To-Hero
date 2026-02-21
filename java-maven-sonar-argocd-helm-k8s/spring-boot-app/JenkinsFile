@@ -52,6 +52,7 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                dir('java-maven-sonar-argocd-helm-k8s') {
                 sh '''
                     git config user.email "nagalakshmi896.xyz@gmail.com"
                     git config user.name "nagalakshmi896"
@@ -61,6 +62,7 @@ pipeline {
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
+              }
             }
         }
     }
