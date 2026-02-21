@@ -52,13 +52,13 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                dir('java-maven-sonar-argocd-helm-k8s') {
+              dir('java-maven-sonar-argocd-helm-k8s') {
                 sh '''
                     git config user.email "nagalakshmi896.xyz@gmail.com"
                     git config user.name "nagalakshmi896"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-                    git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
+                    git add spring-boot-app-manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
